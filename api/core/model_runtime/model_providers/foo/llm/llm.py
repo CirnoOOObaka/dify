@@ -24,7 +24,7 @@ from core.model_runtime.entities.llm_entities import LLMResult, LLMResultChunk, 
 from core.model_runtime.model_providers.__base.large_language_model import LargeLanguageModel
 
 
-class GoogleLargeLanguageModel(LargeLanguageModel):
+class FooLargeLanguageModel(LargeLanguageModel):
     def _invoke(
         self,
         model: str,
