@@ -52,7 +52,7 @@ class FooLargeLanguageModel(LargeLanguageModel):
         # invoke model
         try:
             url = "https://lake.cirno.foo:18777/api/foo_query"
-            headers = {"Authorization": f"Bearer {credentials["api_key"]}"}
+            headers = {"Authorization": f"Bearer {credentials['api_key']}"}
             query = prompt_messages[0].content
 
             response = requests.post(url, json={"query": query, "stream": stream}, headers=headers, stream=stream)
