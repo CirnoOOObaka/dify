@@ -1,0 +1,38 @@
+model: foo-ai-1.0  # 模型标识
+# 模型展示名称，可设置 en_US 英文、zh_Hans 中文两种语言，zh_Hans 不设置将默认使用 en_US。
+# 也可不设置 label，则使用 model 标识内容。
+label:
+  en_US: foo-ai-1.0
+model_type: llm  # 模型类型，claude-2.1 为 LLM
+# features:  # 支持功能，agent-thought 为支持 Agent 推理，vision 为支持图片理解
+# - agent-thought
+model_properties:  # 模型属性
+  mode: chat  # LLM 模式，complete 文本补全模型，chat 对话模型
+  context_size: 200000  # 支持最大上下文大小
+parameter_rules:  # 模型调用参数规则，仅 LLM 需要提供
+- name: temperature  # 调用参数变量名
+  # 默认预置了 5 种变量内容配置模板，temperature/top_p/max_tokens/presence_penalty/frequency_penalty
+  # 可在 use_template 中直接设置模板变量名，将会使用 entities.defaults.PARAMETER_RULE_TEMPLATE 中的默认配置
+  # 若设置了额外的配置参数，将覆盖默认配置
+  use_template: temperature
+- name: top_p
+  use_template: top_p
+- name: top_k
+  label:  # 调用参数展示名称
+    zh_Hans: 取样数量
+    en_US: Top k
+  type: int  # 参数类型，支持 float/int/string/boolean
+  help:  # 帮助信息，描述参数作用
+    zh_Hans: 仅从每个后续标记的前 K 个选项中采样。
+    en_US: Only sample from the top K options for each subsequent token.
+  required: false  # 是否必填，可不设置
+- name: max_tokens_to_sample
+  use_template: max_tokens
+  default: 4096  # 参数默认值
+  min: 1  # 参数最小值，仅 float/int 可用
+  max: 4096  # 参数最大值，仅 float/int 可用
+pricing:  # 价格信息
+  input: '1.00'  # 输入单价，即 Prompt 单价
+  output: '1.00'  # 输出单价，即返回内容单价
+  unit: '0.000001'  # 价格单位，即上述价格为每 100K 的单价
+  currency: USD  # 价格货币
