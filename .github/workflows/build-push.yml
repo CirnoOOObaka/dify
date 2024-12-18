@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "main"
-      - "deploy/dev"
+      - "0.14.0-foo-api"
   release:
     types: [published]
 
@@ -21,7 +21,7 @@ env:
 jobs:
   build:
     runs-on: ${{ matrix.platform == 'linux/arm64' && 'arm64_runner' || 'ubuntu-latest' }}
-    if: github.repository == 'langgenius/dify'
+    if: github.repository == 'CirnoOOObaka/dify'
     strategy:
       matrix:
         include:
